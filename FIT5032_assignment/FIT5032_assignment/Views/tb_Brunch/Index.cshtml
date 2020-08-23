@@ -1,0 +1,81 @@
+﻿@model IEnumerable<FIT5032_assignment.Models.tb_Brunch>
+<!-- author Jinfeng Li -->
+@{
+    ViewBag.Title = "Food List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Food List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("ProductName")
+            </th>
+            <th>
+                @Html.DisplayName("Description")
+            </th>
+            <th>
+                @Html.DisplayName("Category")
+            </th>
+            <th>
+                @Html.DisplayName("Cost")
+            </th>
+            <th>
+                @Html.DisplayName("Last Transaction")
+            </th>
+            <th>
+                @Html.DisplayName("AverRating")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Street)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Suburb)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CostForTwo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Hours)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AverRating)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.BrunchId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.BrunchId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.BrunchId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/DataTables/jquery.dataTables.js")
+    @Scripts.Render("~/Scripts/DataTables/dataTables.bootstrap.js")
+    <script>
+        $(document).ready(function () {
+            $('.table').DataTable();
+        });
+    </script>
+}
+<link href="~/Content/DataTables/css/dataTables.bootstrap.min.css"
+      rel="stylesheet" />

@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Assignment_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tb_Brunch">
+    <Key>
+      <PropertyRef Name="BrunchId" />
+    </Key>
+    <Property Name="BrunchId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Street" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Suburb" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CostForTwo" Type="Int32" Nullable="false" />
+    <Property Name="Hours" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AverRating" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tb_Rating" Relationship="Self.FK__tb_Rating__Brunc__36B12243" FromRole="tb_Brunch" ToRole="tb_Rating" />
+  </EntityType>
+  <EntityType Name="tb_Rating">
+    <Key>
+      <PropertyRef Name="RatingId" />
+    </Key>
+    <Property Name="RatingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BrunchId" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="Rating" Type="Int32" Nullable="false" />
+    <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="RatingDate" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="tb_Brunch" Relationship="Self.FK__tb_Rating__Brunc__36B12243" FromRole="tb_Rating" ToRole="tb_Brunch" />
+    <NavigationProperty Name="tb_User" Relationship="Self.FK__tb_Rating__UserI__2B3F6F97" FromRole="tb_Rating" ToRole="tb_User" />
+  </EntityType>
+  <EntityType Name="tb_User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Type" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tb_Rating" Relationship="Self.FK__tb_Rating__UserI__2B3F6F97" FromRole="tb_User" ToRole="tb_Rating" />
+  </EntityType>
+  <Association Name="FK__tb_Rating__Brunc__36B12243">
+    <End Role="tb_Brunch" Type="Self.tb_Brunch" Multiplicity="1" />
+    <End Role="tb_Rating" Type="Self.tb_Rating" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_Brunch">
+        <PropertyRef Name="BrunchId" />
+      </Principal>
+      <Dependent Role="tb_Rating">
+        <PropertyRef Name="BrunchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tb_Rating__UserI__2B3F6F97">
+    <End Role="tb_User" Type="Self.tb_User" Multiplicity="1" />
+    <End Role="tb_Rating" Type="Self.tb_Rating" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="tb_Rating">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Assignment_dbEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tb_Brunch" EntityType="Self.tb_Brunch" />
+    <EntitySet Name="tb_Rating" EntityType="Self.tb_Rating" />
+    <EntitySet Name="tb_User" EntityType="Self.tb_User" />
+    <AssociationSet Name="FK__tb_Rating__Brunc__36B12243" Association="Self.FK__tb_Rating__Brunc__36B12243">
+      <End Role="tb_Brunch" EntitySet="tb_Brunch" />
+      <End Role="tb_Rating" EntitySet="tb_Rating" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tb_Rating__UserI__2B3F6F97" Association="Self.FK__tb_Rating__UserI__2B3F6F97">
+      <End Role="tb_User" EntitySet="tb_User" />
+      <End Role="tb_Rating" EntitySet="tb_Rating" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

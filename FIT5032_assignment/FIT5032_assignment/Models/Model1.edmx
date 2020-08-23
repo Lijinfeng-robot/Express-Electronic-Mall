@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Assignment_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tb_Brunch">
+          <Key>
+            <PropertyRef Name="BrunchId" />
+          </Key>
+          <Property Name="BrunchId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Street" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Suburb" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CostForTwo" Type="int" Nullable="false" />
+          <Property Name="Hours" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AverRating" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_Rating">
+          <Key>
+            <PropertyRef Name="RatingId" />
+          </Key>
+          <Property Name="RatingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BrunchId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Rating" Type="int" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RatingDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__tb_Rating__Brunc__36B12243">
+          <End Role="tb_Brunch" Type="Self.tb_Brunch" Multiplicity="1" />
+          <End Role="tb_Rating" Type="Self.tb_Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Brunch">
+              <PropertyRef Name="BrunchId" />
+            </Principal>
+            <Dependent Role="tb_Rating">
+              <PropertyRef Name="BrunchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_Rating__UserI__2B3F6F97">
+          <End Role="tb_User" Type="Self.tb_User" Multiplicity="1" />
+          <End Role="tb_Rating" Type="Self.tb_Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tb_Rating">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Assignment_dbModelStoreContainer">
+          <EntitySet Name="tb_Brunch" EntityType="Self.tb_Brunch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Rating" EntityType="Self.tb_Rating" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_User" EntityType="Self.tb_User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tb_Rating__Brunc__36B12243" Association="Self.FK__tb_Rating__Brunc__36B12243">
+            <End Role="tb_Brunch" EntitySet="tb_Brunch" />
+            <End Role="tb_Rating" EntitySet="tb_Rating" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_Rating__UserI__2B3F6F97" Association="Self.FK__tb_Rating__UserI__2B3F6F97">
+            <End Role="tb_User" EntitySet="tb_User" />
+            <End Role="tb_Rating" EntitySet="tb_Rating" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Assignment_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tb_Brunch">
+          <Key>
+            <PropertyRef Name="BrunchId" />
+          </Key>
+          <Property Name="BrunchId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Street" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Suburb" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CostForTwo" Type="Int32" Nullable="false" />
+          <Property Name="Hours" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AverRating" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_Rating" Relationship="Self.FK__tb_Rating__Brunc__36B12243" FromRole="tb_Brunch" ToRole="tb_Rating" />
+        </EntityType>
+        <EntityType Name="tb_Rating">
+          <Key>
+            <PropertyRef Name="RatingId" />
+          </Key>
+          <Property Name="RatingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BrunchId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Rating" Type="Int32" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RatingDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="tb_Brunch" Relationship="Self.FK__tb_Rating__Brunc__36B12243" FromRole="tb_Rating" ToRole="tb_Brunch" />
+          <NavigationProperty Name="tb_User" Relationship="Self.FK__tb_Rating__UserI__2B3F6F97" FromRole="tb_Rating" ToRole="tb_User" />
+        </EntityType>
+        <EntityType Name="tb_User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_Rating" Relationship="Self.FK__tb_Rating__UserI__2B3F6F97" FromRole="tb_User" ToRole="tb_Rating" />
+        </EntityType>
+        <Association Name="FK__tb_Rating__Brunc__36B12243">
+          <End Role="tb_Brunch" Type="Self.tb_Brunch" Multiplicity="1" />
+          <End Role="tb_Rating" Type="Self.tb_Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Brunch">
+              <PropertyRef Name="BrunchId" />
+            </Principal>
+            <Dependent Role="tb_Rating">
+              <PropertyRef Name="BrunchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_Rating__UserI__2B3F6F97">
+          <End Role="tb_User" Type="Self.tb_User" Multiplicity="1" />
+          <End Role="tb_Rating" Type="Self.tb_Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tb_Rating">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Assignment_dbEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tb_Brunch" EntityType="Self.tb_Brunch" />
+          <EntitySet Name="tb_Rating" EntityType="Self.tb_Rating" />
+          <EntitySet Name="tb_User" EntityType="Self.tb_User" />
+          <AssociationSet Name="FK__tb_Rating__Brunc__36B12243" Association="Self.FK__tb_Rating__Brunc__36B12243">
+            <End Role="tb_Brunch" EntitySet="tb_Brunch" />
+            <End Role="tb_Rating" EntitySet="tb_Rating" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_Rating__UserI__2B3F6F97" Association="Self.FK__tb_Rating__UserI__2B3F6F97">
+            <End Role="tb_User" EntitySet="tb_User" />
+            <End Role="tb_Rating" EntitySet="tb_Rating" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Assignment_dbModelStoreContainer" CdmEntityContainer="Assignment_dbEntities1">
+          <EntitySetMapping Name="tb_Brunch">
+            <EntityTypeMapping TypeName="Assignment_dbModel.tb_Brunch">
+              <MappingFragment StoreEntitySet="tb_Brunch">
+                <ScalarProperty Name="BrunchId" ColumnName="BrunchId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="Suburb" ColumnName="Suburb" />
+                <ScalarProperty Name="CostForTwo" ColumnName="CostForTwo" />
+                <ScalarProperty Name="Hours" ColumnName="Hours" />
+                <ScalarProperty Name="AverRating" ColumnName="AverRating" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Rating">
+            <EntityTypeMapping TypeName="Assignment_dbModel.tb_Rating">
+              <MappingFragment StoreEntitySet="tb_Rating">
+                <ScalarProperty Name="RatingId" ColumnName="RatingId" />
+                <ScalarProperty Name="BrunchId" ColumnName="BrunchId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="RatingDate" ColumnName="RatingDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_User">
+            <EntityTypeMapping TypeName="Assignment_dbModel.tb_User">
+              <MappingFragment StoreEntitySet="tb_User">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram DiagramId="0a0b2f95d25543e39d58aed97e29bc50" Name="Diagram1">
+        <EntityTypeShape EntityType="Assignment_dbModel.tb_Brunch" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Assignment_dbModel.tb_Rating" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Assignment_dbModel.tb_User" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <AssociationConnector Association="Assignment_dbModel.FK__tb_Rating__Brunc__36B12243" ManuallyRouted="false" />
+        <AssociationConnector Association="Assignment_dbModel.FK__tb_Rating__UserI__2B3F6F97" ManuallyRouted="false" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

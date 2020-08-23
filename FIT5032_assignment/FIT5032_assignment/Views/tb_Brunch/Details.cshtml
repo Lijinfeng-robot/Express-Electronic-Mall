@@ -1,0 +1,67 @@
+﻿@model FIT5032_assignment.Models.tb_Brunch
+<!-- author Jinfeng Li -->
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Food details</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("ProductName")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Description")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Street)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Category")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Suburb)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Cost")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CostForTwo)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Last Transaction")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hours)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("AverRating")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AverRating)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BrunchId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
